@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday, Sodia Ayu Diah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!--
+  ===================================================================
+  CARA MENGGANTI FOTO & VIDEO (baca ini dulu ya!)
+  ===================================================================
+  1. FOTO di Slide 3 (Your Special Day) — cari komentar "GANTI FOTO SLIDE 3"
+     lalu ganti atribut src="..." pada tag <img> dengan path foto kamu.
+     Contoh: src="foto1.jpg"
+
+  2. FOTO di Slide 5 (Our Memories) — cari komentar "GANTI FOTO SLIDE 5"
+     ada 6 slot foto, ganti masing-masing src="..." dengan foto kamu.
+
+  3. VIDEO di Slide 6 (A Moment For You) — cari komentar "GANTI VIDEO SLIDE 6"
+     ganti src="..." pada tag <source> dengan path video kamu (mp4).
+     Ganti juga poster="..." dengan foto thumbnail video (opsional).
+
+  4. Taruh semua file foto/video di folder yang sama dengan file HTML ini
+     supaya path-nya sederhana (contoh: "foto1.jpg" bukan "/mnt/.../foto1.jpg").
+  ===================================================================
+-->
+
+<style>
+  :root{
+    --bg-deep: #050a1a;
+    --bg-mid: #0b1738;
+    --bg-soft: #142854;
+    --aurora-teal: #34e0c4;
+    --aurora-blue: #4d84f0;
+    --aurora-violet: #8b7ae8;
+    --moon-glow: #fbf6ea;
+    --moon-core: #f2e9d8;
+    --pink: #ffb6c9;
+    --pink-soft: #ffd4de;
+    --text: #f3f5fb;
+    --text-soft: rgba(243,245,251,0.72);
+    --text-faint: rgba(243,245,251,0.5);
+    --card-bg: rgba(15, 26, 58, 0.55);
+    --card-border: rgba(255,255,255,0.14);
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Quicksand', sans-serif;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html, body{
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg-deep);
+    font-family: var(--font-body);
+    color: var(--text);
+  }
+  ::selection{ background: var(--aurora-violet); color: #fff; }
+
+  button{ font-family: inherit; }
+
+  /* ============ AURORA BACKDROP (shared across all slides) ============ */
+  .aurora-stage{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 120% 60% at 50% -10%, rgba(139,122,232,0.35), transparent 60%),
+      linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 55%, var(--bg-soft) 100%);
+    overflow: hidden;
+  }
+  .aurora-ribbon{
+    position: absolute;
+    left: -20%;
+    width: 140%;
+    height: 55%;
+    filter: blur(40px);
+    opacity: 0.35;
+    mix-blend-mode: screen;
+    border-radius: 50%;
+    animation: driftRibbon 22s ease-in-out infinite;
+  }
+  .aurora-ribbon.r1{
+    top: -10%;
+    background: radial-gradient(ellipse at 30% 50%, var(--aurora-teal), transparent 65%);
+    animation-duration: 26s;
+  }
+  .aurora-ribbon.r2{
+    top: 5%;
+    background: radial-gradient(ellipse at 70% 40%, var(--aurora-blue), transparent 65%);
+    animation-duration: 32s;
+    animation-delay: -6s;
+  }
+  .aurora-ribbon.r3{
+    top: 18%;
+    background: radial-gradient(ellipse at 50% 60%, var(--aurora-violet), transparent 65%);
+    animation-duration: 28s;
+    animation-delay: -12s;
+    opacity: 0.28;
+  }
+  @keyframes driftRibbon{
+    0%, 100%{ transform: translateX(0) translateY(0) scaleX(1); }
+    50%{ transform: translateX(6%) translateY(3%) scaleX(1.08); }
+  }
+
+  .stars{
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1.5px 1.5px at 70% 20%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 85% 55%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 55% 85%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 10% 65%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 90% 85%, rgba(255,255,255,0.5), transparent);
+    background-repeat: repeat;
+    background-size: 100% 100%;
+    animation: twinkle 5s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{
+    0%{ opacity: 0.5; }
+    100%{ opacity: 1; }
+  }
+
+  .moon{
+    position: absolute;
+    top: 6%;
+    right: 8%;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--moon-glow), var(--moon-core) 60%, #d8cdb4 100%);
+    box-shadow: 0 0 40px 12px rgba(251,246,234,0.35), 0 0 90px 30px rgba(139,122,232,0.15);
+  }
+  .moon::after{
+    content:'';
+    position:absolute;
+    top: 18px; left: 12px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: rgba(216,205,180,0.5);
+    box-shadow: 22px 20px 0 -4px rgba(216,205,180,0.4), 8px 30px 0 -6px rgba(216,205,180,0.35);
+  }
+
+  /* ============ FALLING PETALS & HEARTS ============ */
+  .petal-layer{
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .petal{
+    position: absolute;
+    top: -8%;
+    will-change: transform, opacity;
+    animation-name: fallDrift;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes fallDrift{
+    0%{ transform: translate(0,0) rotate(0deg); opacity: 0; }
+    8%{ opacity: 0.9; }
+    90%{ opacity: 0.85; }
+    100%{ transform: translate(var(--drift, 40px), 112vh) rotate(360deg); opacity: 0; }
+  }
+  .petal svg{ display:block; }
+
+  /* ============ SLIDES CONTAINER ============ */
+  .slides{
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+  }
+  .slide{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 8vh 6vw 12vh;
+    opacity: 0;
+    transform: translateY(24px);
+    pointer-events: none;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .slide.active{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .eyebrow{
+    font-family: var(--font-body);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--pink-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:'';
+    width: 22px; height: 1px;
+    background: var(--pink-soft);
+    opacity: 0.6;
+  }
+
+  h1.display{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(38px, 8vw, 64px);
+    line-height: 1.08;
+    letter-spacing: 0.01em;
+  }
+  h1.display em{
+    font-style: italic;
+    font-weight: 500;
+    background: linear-gradient(90deg, var(--aurora-teal), var(--pink-soft) 60%, var(--aurora-violet));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .subline{
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-soft);
+    margin-top: 14px;
+    max-width: 340px;
+  }
+
+  /* ---- Slide 1: Countdown ---- */
+  .countdown-grid{
+    display: flex;
+    gap: 14px;
+    margin: 34px 0 26px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .count-box{
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(6px);
+    border-radius: 14px;
+    padding: 16px 18px;
+    min-width: 68px;
+    box-shadow: 0 0 24px rgba(77,132,240,0.12);
+  }
+  .count-box .num{
+    font-family: var(--font-display);
+    font-size: clamp(28px, 6vw, 40px);
+    font-weight: 600;
+    color: var(--text);
+  }
+  .count-box .lbl{
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-top: 4px;
+  }
+  .count-sep{ display:none; }
+
+  .today-note{
+    font-size: 13px;
+    color: var(--aurora-teal);
+    margin-bottom: 22px;
+    letter-spacing: 0.05em;
+  }
+
+  .btn{
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bg-deep);
+    background: linear-gradient(90deg, var(--pink-soft), var(--aurora-teal));
+    border: none;
+    padding: 14px 30px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(52,224,196,0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn:hover{ transform: translateY(-2px); box-shadow: 0 12px 34px rgba(52,224,196,0.35); }
+  .btn:active{ transform: translateY(0); }
+  .btn-ghost{
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--card-border);
+    box-shadow: none;
+  }
+
+  /* ---- Slide 2: Gift box ---- */
+  .gift-wrap{
+    position: relative;
+    width: 190px;
+    height: 190px;
+    margin: 30px 0 18px;
+    cursor: pointer;
+  }
+  .gift-wrap svg{ width: 100%; height: 100%; filter: drop-shadow(0 0 26px rgba(255,182,201,0.35)); }
+  .gift-wrap.opened svg{ animation: giftPop 0.5s ease forwards; }
+  @keyframes giftPop{
+    0%{ transform: scale(1); }
+    40%{ transform: scale(1.12) rotate(-3deg); }
+    100%{ transform: scale(0); opacity: 0; }
+  }
+  .gift-hint{
+    font-size: 13px;
+    color: var(--text-faint);
+    letter-spacing: 0.04em;
+  }
+  .sparkle-burst{
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* ---- Slide 3: Your special day / letter cover ---- */
+  .polaroid-frame{
+    position: absolute;
+    width: 92px;
+    background: #fdfaf3;
+    padding: 8px 8px 22px;
+    border-radius: 4px;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+  }
+  .polaroid-frame img{
+    width: 100%;
+    height: 96px;
+    object-fit: cover;
+    display: block;
+    border-radius: 2px;
+    background: linear-gradient(135deg, #cfd9e8, #e9d9e0);
+  }
+  .p1{ top: 12%; left: 6%; transform: rotate(-11deg); }
+  .p2{ top: 58%; left: 4%; transform: rotate(8deg); }
+  .p3{ top: 15%; right: 5%; transform: rotate(9deg); }
+  .p4{ top: 60%; right: 6%; transform: rotate(-7deg); }
+
+  .love-icon{
+    font-size: 26px;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 0 10px rgba(255,182,201,0.6));
+  }
+
+  /* ---- Slide 4 & 7: Letter card ---- */
+  .letter-card{
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    padding: 34px 30px;
+    max-width: 480px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35), inset 0 0 40px rgba(139,122,232,0.06);
+    max-height: 62vh;
+    overflow-y: auto;
+  }
+  .letter-card::-webkit-scrollbar{ width: 4px; }
+  .letter-card::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.2); border-radius: 4px; }
+  .letter-heading{
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--pink-soft);
+    margin-bottom: 14px;
+  }
+  .letter-body{
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--text-soft);
+    text-align: left;
+    white-space: pre-line;
+  }
+  .letter-signoff{
+    margin-top: 16px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text);
+    text-align: right;
+  }
+
+  /* ---- Slide 5: Memories gallery ---- */
+  .memories-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 460px;
+    width: 100%;
+    margin: 22px 0 8px;
+  }
+  .memories-grid img{
+    width: 100%;
+    height: 92px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--card-border);
+    background: linear-gradient(135deg, #1c2c55, #2a2050);
+  }
+
+  /* ---- Slide 6: video ---- */
+  .video-frame{
+    width: 100%;
+    max-width: 340px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    background: #0a1230;
+    margin: 20px 0 10px;
+  }
+  .video-frame video{
+    width: 100%;
+    display: block;
+    max-height: 46vh;
+  }
+
+  /* ============ NAV CONTROLS ============ */
+  .nav-arrows{
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .arrow-btn{
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--card-border);
+    color: var(--text);
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .arrow-btn:hover{ background: rgba(255,255,255,0.16); }
+  .arrow-btn:disabled{ opacity: 0.25; cursor: default; }
+  .arrow-btn:disabled:hover{ background: rgba(255,255,255,0.08); }
+
+  /* ============ MUSIC MUTE BUTTON ============ */
+  .music-btn{
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 6;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(15, 26, 58, 0.55);
+    border: 1px solid var(--card-border);
+    color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 17px;
+    backdrop-filter: blur(6px);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .music-btn:hover{ background: rgba(255,255,255,0.16); transform: scale(1.06); }
+  .music-btn.muted{ opacity: 0.55; }
+
+  .dots{
+    display: flex;
+    gap: 8px;
+  }
+  .dot{
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    transition: all 0.3s ease;
+  }
+  .dot.active{
+    background: var(--aurora-teal);
+    box-shadow: 0 0 8px var(--aurora-teal);
+    width: 18px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 480px){
+    .polaroid-frame{ width: 74px; }
+    .polaroid-frame img{ height: 76px; }
+    .memories-grid img{ height: 76px; }
+    .letter-card{ padding: 26px 20px; max-height: 56vh; }
+    .moon{ width: 56px; height: 56px; top: 4%; right: 6%; }
+    .count-box{ padding: 12px 12px; min-width: 58px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="aurora-stage">
+  <div class="stars"></div>
+  <div class="aurora-ribbon r1"></div>
+  <div class="aurora-ribbon r2"></div>
+  <div class="aurora-ribbon r3"></div>
+  <div class="moon"></div>
+</div>
+
+<div class="petal-layer" id="petalLayer"></div>
+
+<div class="slides">
+
+  <!-- SLIDE 1: Countdown -->
+  <section class="slide" data-slide="0">
+    <div class="eyebrow">Menghitung Hari</div>
+    <h1 class="display">Her Special Day<br><em>is Coming</em></h1>
+    <p class="subline">Sesuatu yang indah sedang menunggu untukmu 🤍</p>
+    <div class="countdown-grid" id="countdown">
+      <div class="count-box"><div class="num" id="cd-days">00</div><div class="lbl">Hari</div></div>
+      <div class="count-box"><div class="num" id="cd-hours">00</div><div class="lbl">Jam</div></div>
+      <div class="count-box"><div class="num" id="cd-mins">00</div><div class="lbl">Menit</div></div>
+      <div class="count-box"><div class="num" id="cd-secs">00</div><div class="lbl">Detik</div></div>
+    </div>
+    <div class="today-note" id="todayNote" style="display:none;">Hari ini adalah hari spesialnya! 🌸</div>
+    <button class="btn" onclick="goTo(1)">Open Her Gift 🎁</button>
+  </section>
+
+  <!-- SLIDE 2: Gift box -->
+  <section class="slide" data-slide="1">
+    <div class="eyebrow">Ada Sesuatu Untukmu</div>
+    <div class="gift-wrap" id="giftBox" onclick="openGift()">
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="52" width="84" height="56" rx="4" fill="#1c2b5c" stroke="#ffd4de" stroke-width="1.5"/>
+        <rect x="18" y="52" width="84" height="14" fill="#28397a"/>
+        <rect x="54" y="52" width="12" height="56" fill="#ffb6c9" opacity="0.85"/>
+        <rect x="18" y="58" width="84" height="6" fill="#ffb6c9" opacity="0.85"/>
+        <path d="M60 52C60 52 44 30 32 34C20 38 30 54 60 52Z" fill="none" stroke="#ffd4de" stroke-width="2"/>
+        <path d="M60 52C60 52 76 30 88 34C100 38 90 54 60 52Z" fill="none" stroke="#ffd4de" stroke-width="2"/>
+        <circle cx="60" cy="51" r="5" fill="#ffd4de"/>
+      </svg>
+    </div>
+    <p class="gift-hint">Klik untuk membuka hadiahmu ✨</p>
+  </section>
+
+  <!-- SLIDE 3: Your Special Day (letter cover) -->
+  <section class="slide" data-slide="2">
+    <!-- GANTI FOTO SLIDE 3: ganti src="" pada 4 <img> di bawah -->
+    <div class="polaroid-frame p1"><img src="kenangan 1.JPG" alt="kenangan 1"></div>
+    <div class="polaroid-frame p2"><img src="kenangan 2.JPG" alt="kenangan 2"></div>
+    <div class="polaroid-frame p3"><img src="kenangan 3.jpg" alt="kenangan 3"></div>
+    <div class="polaroid-frame p4"><img src="kenangan 4.jpg" alt="kenangan 4"></div>
+
+    <div class="love-icon">💌</div>
+    <div class="eyebrow">A Love Letter For You</div>
+    <h1 class="display">Your <em>Special Day</em></h1>
+    <p class="subline">Created with love, just for you</p>
+    <div style="margin-top:28px;">
+      <button class="btn" onclick="goTo(3)">Read My Letter</button>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: Happy Birthday letter -->
+  <section class="slide" data-slide="3">
+    <h1 class="display" style="margin-bottom:20px;">Happy Birthday</h1>
+    <div class="letter-card">
+      <div class="letter-heading">Happy Birthday, sayangku 🤍</div>
+      <div class="letter-body">Selamat ulang tahun, sayang.
+Semoga di usia yang baru ini kamu selalu diberi kesehatan, kebahagiaan, dan dimudahkan dalam setiap langkah yang kamu ambil. Terima kasih sudah menjadi seseorang yang selalu ada, memberi semangat, dan menghadirkan banyak cerita indah dalam hidupku.
+
+Aku berharap semua hal baik yang kamu impikan bisa terwujud satu per satu. Apa pun yang nanti kita hadapi, semoga kita tetap bisa saling mendukung dan tumbuh bersama.
+
+Nikmati hari spesialmu, ya. Hari ini adalah harimu, dan semoga menjadi awal dari banyak kebahagiaan yang akan datang.
+
+Selamat ulang tahun. Semoga kamu selalu menjadi versi terbaik dari dirimu, dan semoga aku masih diberi kesempatan untuk menemani setiap perjalananmu.</div>
+      <div class="letter-signoff">— untuk Sodia Ayu Diah</div>
+    </div>
+    <div style="margin-top:22px;">
+      <button class="btn" onclick="goTo(4)">Lanjut</button>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: Our Memories -->
+  <section class="slide" data-slide="4">
+    <h1 class="display">Our <em>Memories</em></h1>
+    <p class="subline">Every memory captured in love 🌸</p>
+    <div class="memories-grid">
+      <!-- GANTI FOTO SLIDE 5: ganti src="" pada 6 <img> di bawah -->
+      <img src="momen 1.jpg" alt="momen 1">
+      <img src="momen 2.jpg" alt="momen 2">
+      <img src="momen 3.jpg" alt="momen 3">
+      <img src="momen 4.jpg" alt="momen 4">
+      <img src="momen 5.jpeg" alt="momen 5">
+      <img src="momen 6.jpeg" alt="momen 6">
+    </div>
+    <div style="margin-top:20px;">
+      <button class="btn" onclick="goTo(5)">Lanjut</button>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: A Moment For You (video) -->
+  <section class="slide" data-slide="5">
+    <h1 class="display">A Moment <em>For You</em></h1>
+    <p class="subline">A special video message</p>
+    <div class="video-frame">
+      <!-- GANTI VIDEO SLIDE 6: ganti src pada <source> dan poster di bawah -->
+      <video controls poster="thumbnail.png">
+        <source src="video.mp4" type="video/mp4">
+        Browser kamu tidak mendukung video.
+      </video>
+    </div>
+    <div style="margin-top:16px;">
+      <button class="btn" onclick="goTo(6)">Lanjut</button>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: Birthday Wishes -->
+  <section class="slide" data-slide="6">
+    <h1 class="display">Birthday <em>Wishes</em></h1>
+    <div class="letter-card" style="margin-top:18px;">
+      <div class="letter-heading">Happy Birthday, my love 🤍</div>
+      <div class="letter-body">Happy Birthday, sayang! 🤍
+Semoga di usia yang baru ini kamu selalu diberi kesehatan, kebahagiaan, dan ketenangan dalam menjalani setiap langkah. Semoga semua impian dan tujuan yang sedang kamu perjuangkan bisa tercapai satu per satu. Tetap menjadi pribadi yang baik, kuat, dan selalu percaya pada dirimu sendiri.
+
+Terima kasih sudah menjadi bagian dari hidupku. Semoga kita terus tumbuh bersama, saling mendukung, dan menciptakan lebih banyak kenangan indah ke depannya.
+
+Have the happiest birthday. You deserve every good thing life has to offer.</div>
+    </div>
+    <p class="subline" style="margin-top:22px;">Dengan cinta, selalu 🌙🤍</p>
+  </section>
+
+</div>
+
+<!-- BACKGROUND MUSIC: ganti src="music.mp3" kalau nama file musikmu berbeda -->
+<audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
+
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="Mute/unmute musik">🔊</button>
+
+<div class="nav-arrows">
+  <button class="arrow-btn" id="prevBtn" onclick="prevSlide()">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="arrow-btn" id="nextBtn" onclick="nextSlide()">›</button>
+</div>
+
+<script>
+  /* ============ SLIDE NAVIGATION ============ */
+  const totalSlides = 7;
+  let current = 0;
+  const slidesEls = document.querySelectorAll('.slide');
+  const dotsWrap = document.getElementById('dots');
+
+  for(let i=0;i<totalSlides;i++){
+    const d = document.createElement('div');
+    d.className = 'dot' + (i===0 ? ' active' : '');
+    d.addEventListener('click', ()=>goTo(i));
+    dotsWrap.appendChild(d);
+  }
+  const dotEls = document.querySelectorAll('.dot');
+
+  function render(){
+    slidesEls.forEach(s=>{
+      s.classList.toggle('active', parseInt(s.dataset.slide)===current);
+    });
+    dotEls.forEach((d,i)=> d.classList.toggle('active', i===current));
+    document.getElementById('prevBtn').disabled = current===0;
+    document.getElementById('nextBtn').disabled = current===totalSlides-1;
+  }
+  function goTo(i){
+    if(i<0||i>=totalSlides) return;
+    current = i;
+    render();
+  }
+  function nextSlide(){ goTo(current+1); }
+  function prevSlide(){ goTo(current-1); }
+  render();
+
+  // keyboard
+  window.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight') nextSlide();
+    if(e.key==='ArrowLeft') prevSlide();
+  });
+
+  // swipe (mobile)
+  let touchStartX = 0;
+  window.addEventListener('touchstart', e=>{ touchStartX = e.touches[0].clientX; }, {passive:true});
+  window.addEventListener('touchend', e=>{
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(dx) > 50){
+      if(dx < 0) nextSlide(); else prevSlide();
+    }
+  }, {passive:true});
+
+  /* ============ GIFT BOX ============ */
+  function openGift(){
+    const box = document.getElementById('giftBox');
+    box.classList.add('opened');
+    setTimeout(()=> goTo(2), 480);
+  }
+
+  /* ============ COUNTDOWN ============ */
+  function getTargetDate(){
+    const now = new Date();
+    let year = now.getFullYear();
+    let target = new Date(year, 6, 7, 0, 0, 0); // July is month index 6
+    if(target < now){
+      // if already passed this year, count to next year
+      target = new Date(year+1, 6, 7, 0, 0, 0);
+    }
+    return target;
+  }
+  function updateCountdown(){
+    const now = new Date();
+    const target = getTargetDate();
+    const diff = target - now;
+    const dEl = document.getElementById('cd-days');
+    const hEl = document.getElementById('cd-hours');
+    const mEl = document.getElementById('cd-mins');
+    const sEl = document.getElementById('cd-secs');
+    const note = document.getElementById('todayNote');
+
+    if(diff <= 0){
+      dEl.textContent='00'; hEl.textContent='00'; mEl.textContent='00'; sEl.textContent='00';
+      note.style.display='block';
+      return;
+    }
+    const totalSec = Math.floor(diff/1000);
+    const days = Math.floor(totalSec / 86400);
+    const hours = Math.floor((totalSec % 86400)/3600);
+    const mins = Math.floor((totalSec % 3600)/60);
+    const secs = totalSec % 60;
+    dEl.textContent = String(days).padStart(2,'0');
+    hEl.textContent = String(hours).padStart(2,'0');
+    mEl.textContent = String(mins).padStart(2,'0');
+    sEl.textContent = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ============ FALLING SAKURA PETALS & HEARTS ============ */
+  const petalLayer = document.getElementById('petalLayer');
+  const sakuraSVG = `<svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 2c1.2 1.6 1.2 3.4 0 5-1.2-1.6-1.2-3.4 0-5zM10 13c1.2 1.6 1.2 3.4 0 5-1.2-1.6-1.2-3.4 0-5zM2 10c1.6-1.2 3.4-1.2 5 0-1.6 1.2-3.4 1.2-5 0zM13 10c1.6-1.2 3.4-1.2 5 0-1.6 1.2-3.4 1.2-5 0zM10 10c0 0-2-1-2-3s2-3 2-3 2 1 2 3-2 3-2 3z" fill="#ffc4d6" opacity="0.9"/></svg>`;
+  const heartSVG = `<svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-10-9.2C0.2 8.6 2 5 5.5 5c2 0 3.4 1.1 4.5 2.6C11.1 6.1 12.5 5 14.5 5 18 5 19.8 8.6 22 11.8 19 16.4 12 21 12 21z" fill="#ffb6c9" opacity="0.85"/></svg>`;
+
+  function spawnPetal(){
+    const el = document.createElement('div');
+    el.className = 'petal';
+    const isHeart = Math.random() < 0.35;
+    el.innerHTML = isHeart ? heartSVG : sakuraSVG;
+    const size = isHeart ? (10 + Math.random()*8) : (14 + Math.random()*10);
+    el.style.left = (Math.random()*100) + 'vw';
+    el.style.width = size+'px';
+    el.style.height = size+'px';
+    const duration = 9 + Math.random()*8;
+    const drift = (Math.random()*80 - 40) + 'px';
+    el.style.setProperty('--drift', drift);
+    el.style.animationDuration = duration+'s';
+    el.style.animationDelay = '0s';
+    petalLayer.appendChild(el);
+    setTimeout(()=> el.remove(), duration*1000 + 200);
+  }
+  // gentle continuous spawn
+  for(let i=0;i<6;i++) setTimeout(spawnPetal, i*400);
+  setInterval(spawnPetal, 900);
+
+  /* ============ BACKGROUND MUSIC ============ */
+  const bgMusic = document.getElementById('bgMusic');
+  const musicBtn = document.getElementById('musicBtn');
+  let musicStarted = false;
+  let userMuted = false;
+
+  function updateMusicIcon(){
+    musicBtn.textContent = (userMuted || bgMusic.paused) ? '🔇' : '🔊';
+    musicBtn.classList.toggle('muted', userMuted || bgMusic.paused);
+  }
+
+  // Mulai memutar musik begitu ada interaksi pertama (klik/tap/tombol),
+  // supaya tidak diblokir kebijakan autoplay browser.
+  function startMusicOnFirstInteraction(){
+    if(musicStarted || userMuted) return;
+    musicStarted = true;
+    bgMusic.play().then(updateMusicIcon).catch(()=>{
+      // kalau gagal, biarkan tombol mute yang memulainya
+      musicStarted = false;
+    });
+  }
+  ['click','touchstart','keydown'].forEach(evt=>{
+    window.addEventListener(evt, startMusicOnFirstInteraction, { once:true, passive:true });
+  });
+
+  function toggleMusic(){
+    if(bgMusic.paused){
+      userMuted = false;
+      musicStarted = true;
+      bgMusic.play().catch(()=>{});
+    } else {
+      userMuted = true;
+      bgMusic.pause();
+    }
+    updateMusicIcon();
+  }
+  updateMusicIcon();
+</script>
+</body>
+</html>
